@@ -1,0 +1,15 @@
+[
+  {
+    "symbol": "TCS",
+    "name": "Tata Consultancy Services",
+    "price": 3512.25,
+    "change": 1.6
+  },
+  {
+    "symbol": "HDFC",
+    "name": "HDFC Bank",
+    "price": 1521.0,
+    "change": -0.9
+  }
+
+]
