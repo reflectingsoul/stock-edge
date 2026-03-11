@@ -1,16 +1,64 @@
-import React from 'react';
+import React from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
-import StockCard from "./assets/Components/StockCard";
-import Home from './assets/Pages/Home';
-// import PaginatedStocks from "./assets/Pages/PaginatedStocks";
+import Header from "./assets/Components/Header";
+import Footer from "./assets/Components/Footer";
+import ProtectedRoute from "./assets/Components/ProtectedRoute";
 
-function App() {
+import Home from "./assets/Pages/Home";
+import PaginatedStocks from "./assets/Pages/PaginatedStocks";
+import Watchlist from "./assets/Pages/Watchlist";
+import Login from "./assets/Pages/Login";
+import Register from "./assets/Pages/Register";
+
+export default function App() {
+
+  const location = useLocation();
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      {/* <PaginatedStocks /> */}
-      <Home />
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white flex flex-col">
+
+      <Header />
+
+      <main className="flex-grow max-w-7xl mx-auto px-6 py-10">
+
+        <AnimatePresence mode="wait">
+
+          <Routes location={location} key={location.pathname}>
+
+            <Route path="/" element={<Home />} />
+
+            <Route path="/login" element={<Login />} />
+
+            <Route path="/register" element={<Register />} />
+
+            <Route
+              path="/paginated"
+              element={
+                <ProtectedRoute>
+                  <PaginatedStocks />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/watchlist"
+              element={
+                <ProtectedRoute>
+                  <Watchlist />
+                </ProtectedRoute>
+              }
+            />
+
+          </Routes>
+
+        </AnimatePresence>
+
+      </main>
+
+      <Footer />
+
     </div>
   );
 }
-
-export default App;
